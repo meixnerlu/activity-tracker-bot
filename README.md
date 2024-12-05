@@ -12,22 +12,16 @@ Invite link: [discord.com](https://discord.com/oauth2/authorize?client_id=128272
 
 Getting started:
 
-<code> 
-/setup run 
-</code>
+<code>/setup run</code>
 
 Starts a wizard like dialogue to get you started.
 If you select a role, you can add a button for your users to self-assign the role:
 
-<code>
-/setup role_button
-</code>
+<code>/setup role_button</code>
 
 You can remove the bot from tracking your members and delete all data with this command:
 
-<code>
-/setup delete
-</code>
+<code>/setup delete</code>
 
 ## Self host
 
