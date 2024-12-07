@@ -15,3 +15,6 @@ pub use sync_user_states::*;
 
 mod leaderboard;
 pub use leaderboard::*;
+
+mod setup;
+pub use setup::*;

@@ -71,7 +71,7 @@ impl GuildSetup {
         }
     }
 
-    pub async fn get_role(
+    pub async fn get_data(
         guild_id: impl Into<serenity::GuildId>,
     ) -> Result<Option<serenity::RoleId>, Error> {
         let guild_id = guild_id.into();
@@ -126,6 +126,28 @@ impl MongoCrud for GuildSetup {
         let cache = State::global().await.guild_cache();
 
         cache.insert(self.guild_id, self.role_to_watch);
+
+        Ok(())
+    }
+
+    async fn change(
+        filter: mongodb::bson::Document,
+        change: mongodb::bson::Document,
+    ) -> Result<(), mongodb::error::Error> {
+        Self::get_collection()
+            .await
+            .update_many(filter.clone(), change)
+            .await?;
+
+        let cache = State::global().await.guild_cache();
+        let guild_id: serenity::GuildId = filter
+            .get_str("guild_id")
+            .unwrap()
+            .parse::<u64>()
+            .unwrap()
+            .into();
+
+        cache.remove(&guild_id);
 
         Ok(())
     }

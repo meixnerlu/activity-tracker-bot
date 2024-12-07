@@ -1,6 +1,6 @@
 # Activity Tracker Bot
 
-A bot that tracks voice chat activity for all users or users with a specified role. 
+A bot that tracks voice chat activity for all users or users with a specified role.
 All data will be deleted after 2 weeks.
 Displays a leaderboard with the top 10 most active users.
 
@@ -19,6 +19,10 @@ If you select a role, you can add a button for your users to self-assign the rol
 
 <code>/setup role_button</code>
 
+If you want to change the role selection you can use:
+
+<code>/setup edit</code>
+
 You can remove the bot from tracking your members and delete all data with this command:
 
 <code>/setup delete</code>
@@ -32,6 +36,5 @@ env:
 | Varible | Value |
 | -------------- | --------------- |
 | MONGODB | full uri string to mongodb database/replicaset |
-| DISCORD_TOKEN | Bot token from [discord.dev](discord.dev) |
+| DISCORD_TOKEN | Bot token from [discord.dev](https://discord.dev) |
 | LEADERBOARD | Cron like timing for how often the leaderboards get updated [tokio-cron-scheduler](https://github.com/mvniekerk/tokio-cron-scheduler) |
-

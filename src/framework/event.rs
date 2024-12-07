@@ -85,8 +85,9 @@ async fn handle_voice_event(
 ) -> Result<(), Error> {
     let guild_id = new.guild_id.unwrap();
     let user_id = new.user_id;
+    let role = GuildSetup::get_data(guild_id).await?;
 
-    if let Some(role) = GuildSetup::get_role(guild_id).await? {
+    if let Some(role) = role {
         if !new
             .user_id
             .to_user(ctx.http())

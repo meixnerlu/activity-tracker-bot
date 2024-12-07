@@ -18,6 +18,17 @@ where
         Self::get_collection().await.find_one(filter).await
     }
 
+    async fn change(
+        filter: mongodb::bson::Document,
+        change: mongodb::bson::Document,
+    ) -> Result<(), mongodb::error::Error> {
+        Self::get_collection()
+            .await
+            .update_many(filter, change)
+            .await
+            .map(|_| ())
+    }
+
     async fn delete(filter: mongodb::bson::Document) -> Result<(), mongodb::error::Error> {
         Self::get_collection()
             .await
