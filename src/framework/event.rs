@@ -1,3 +1,5 @@
+use serenity::http;
+
 use crate::prelude::*;
 
 #[allow(unused)]
@@ -86,15 +88,14 @@ async fn handle_voice_event(
     let guild_id = new.guild_id.unwrap();
     let user_id = new.user_id;
     let role = GuildSetup::get_data(guild_id).await?;
+    let user = new.user_id.to_user(ctx.http()).await?;
+
+    if user.bot {
+        return Ok(());
+    }
 
     if let Some(role) = role {
-        if !new
-            .user_id
-            .to_user(ctx.http())
-            .await?
-            .has_role(ctx.http(), guild_id, role)
-            .await?
-        {
+        if !user.has_role(ctx.http(), guild_id, role).await? {
             return Ok(());
         }
     };
