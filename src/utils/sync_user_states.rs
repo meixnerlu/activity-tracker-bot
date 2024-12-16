@@ -25,14 +25,13 @@ pub async fn sync_user_states(
 
         for dc_active_user in dc_active {
             if !db_active.contains(&dc_active_user) {
+                let user = dc_active_user.to_user(ctx.http()).await?;
+                if user.bot {
+                    continue;
+                }
                 match guild.role_to_watch {
                     Some(role) => {
-                        if dc_active_user
-                            .to_user(ctx.http())
-                            .await?
-                            .has_role(ctx.http(), &guild.guild_id, role)
-                            .await?
-                        {
+                        if user.has_role(ctx.http(), &guild.guild_id, role).await? {
                             UserDcEvent::new(guild.guild_id, dc_active_user, UserEventType::Joined)
                                 .insert()
                                 .await?;

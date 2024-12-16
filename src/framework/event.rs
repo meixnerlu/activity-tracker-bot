@@ -1,5 +1,3 @@
-use serenity::http;
-
 use crate::prelude::*;
 
 #[allow(unused)]
