@@ -1,3 +1,8 @@
+# Archive
+
+This bots commands have been moved to [meixnerlu/daichi](https://github.com/meixnerlu/daichi).
+The invite link still works bot the bot will be offline.
+
 # Activity Tracker Bot
 
 A bot that tracks voice chat activity for all users or users with a specified role.
